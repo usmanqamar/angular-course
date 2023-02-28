@@ -1,0 +1,13 @@
+<div class="row">
+  <div class="col-sm-12">
+    <button class="btn btn-success" (click)="onNew()">Add Recipe</button>
+  </div>
+</div>
+<div class="alert alert-danger mt-2" *ngIf="error">{{error}}</div>
+<div class="row mt-4">
+  <div class="col-sm-12">
+    <div class="list-group" >
+        <app-recipie-item [recipe]="recipe" *ngFor="let recipe of recipies; let i=index" ></app-recipie-item>
+    </div>
+  </div>
+</div>

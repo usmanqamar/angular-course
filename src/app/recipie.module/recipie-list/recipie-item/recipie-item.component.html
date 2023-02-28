@@ -1,0 +1,11 @@
+<a style="cursor: pointer" [routerLink]="['/recipes', recipe.id]" class="list-group-item"  routerLinkActive="active">
+  <div class="clearfix">
+    <div class="float-start">
+      <h4>{{recipe.name}}</h4>
+      <p>{{recipe.description}}</p>
+    </div>
+    <span class="float-end">
+            <img [src]="recipe.imagePath" class="img-fluid" style="max-height: 50px" alt="{{recipe.name}}" />
+          </span>
+  </div>
+</a>
