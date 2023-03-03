@@ -9,13 +9,16 @@ import {
 } from '@angular/core';
 import { Ingredient } from '../../shared.module/ingredient.model';
 import { ShoppingListService } from '../services/shopping-list.service';
-import { NgForm } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 import { Subscription } from 'rxjs';
+import { NgIf } from '@angular/common';
 
 @Component({
+  standalone: true,
   selector: 'app-shopping-edit',
   templateUrl: './shopping-edit.component.html',
   styleUrls: ['./shopping-edit.component.css'],
+  imports: [FormsModule, NgIf],
 })
 export class ShoppingEditComponent implements OnInit, OnDestroy {
   @ViewChild('form', { static: false }) form: NgForm;

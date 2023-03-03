@@ -9,6 +9,7 @@ import {
 } from '@angular/core';
 
 @Directive({
+  standalone: true,
   selector: '[myHighlight]',
 })
 export class HighlightDirective implements OnInit {

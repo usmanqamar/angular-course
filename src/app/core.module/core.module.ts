@@ -4,18 +4,16 @@ import { RequestInterceptorService } from './interceptor/request.interceptor';
 import { ShoppingListService } from '../shopping-list.module/services/shopping-list.service';
 import { AuthGuardService } from '../shared.module/guards/auth-guard.service';
 import { AuthService } from '../auth.module/auth.service';
-import { LoggingService } from '../logging.service';
 @NgModule({
   providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: RequestInterceptorService,
-      multi: true,
-    },
-    ShoppingListService,
+    // {
+    //   provide: HTTP_INTERCEPTORS,
+    //   useClass: RequestInterceptorService,
+    //   multi: true,
+    // },
+    // ShoppingListService,
+    //AuthService,
     AuthGuardService,
-    AuthService,
-    LoggingService,
   ],
 })
 export class CoreModule {

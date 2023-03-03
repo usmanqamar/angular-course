@@ -3,11 +3,16 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Recipie } from '../recipie.model';
 import { RecipeService } from '../services/recipe.service';
 import { LoggingService } from '../../logging.service';
+import { RecipieItemComponent } from './recipie-item/recipie-item.component';
+import { EditRecipeComponent } from '../edit-recipe/edit-recipe.component';
+import { CommonModule, NgIf } from '@angular/common';
 
 @Component({
+  standalone: true,
   selector: 'app-recipie-list',
   templateUrl: './recipie-list.component.html',
   styleUrls: ['./recipie-list.component.css'],
+  imports: [RecipieItemComponent, CommonModule],
 })
 export class RecipieListComponent implements OnInit {
   recipies: Recipie[] = [];

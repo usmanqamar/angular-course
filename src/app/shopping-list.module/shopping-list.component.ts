@@ -3,11 +3,16 @@ import { Ingredient } from '../shared.module/ingredient.model';
 import { ShoppingEditComponent } from './shopping-edit/shopping-edit.component';
 import { ShoppingListService } from './services/shopping-list.service';
 import { Subscription } from 'rxjs';
+import { NgFor } from '@angular/common';
+import { FormsModule, NgForm, ReactiveFormsModule } from '@angular/forms';
+import { HighlightDirective } from '../shared.module/directives/highlight.directive';
 
 @Component({
+  standalone: true,
   selector: 'app-shopping-list',
   templateUrl: './shopping-list.component.html',
   styleUrls: ['./shopping-list.component.css'],
+  imports: [ShoppingEditComponent, NgFor, HighlightDirective],
 })
 export class ShoppingListComponent implements OnInit, OnDestroy {
   ingredients: Ingredient[];

@@ -1,20 +1,28 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormArray,
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { RecipeService } from '../services/recipe.service';
 import { Recipie } from '../recipie.model';
 import { Ingredient } from '../../shared.module/ingredient.model';
+import { CommonModule, NgFor } from '@angular/common';
 
 @Component({
+  standalone: true,
   selector: 'app-edit-recipe',
   templateUrl: './edit-recipe.component.html',
   styleUrls: ['./edit-recipe.component.css'],
+  imports: [ReactiveFormsModule, CommonModule],
 })
 export class EditRecipeComponent implements OnInit {
   id: number;
   editMode: boolean;
   recipeForm: FormGroup;
-
   constructor(
     private route: ActivatedRoute,
     private recipeService: RecipeService,

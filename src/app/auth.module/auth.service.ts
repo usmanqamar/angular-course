@@ -10,7 +10,7 @@ export interface AuthResponse {
   expiresIn: string;
   localId: string;
 }
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class AuthService {
   user = new BehaviorSubject<UserModel | null>(null);
   timer: any;

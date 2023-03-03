@@ -1,9 +1,10 @@
+import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { Ingredient } from '../../shared.module/ingredient.model';
-//
-// @Injectable({
-//   providedIn: 'root',
-// })
+
+@Injectable({
+  providedIn: 'root',
+})
 export class ShoppingListService {
   private ingredients: Ingredient[] = [
     new Ingredient('Apple', 5),

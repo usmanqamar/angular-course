@@ -1,6 +1,20 @@
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { bootstrapApplication } from '@angular/platform-browser';
+import { AppComponent } from './app/app.component';
+import { AuthGuardService } from './app/shared.module/guards/auth-guard.service';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { AppRoutingModule } from './app/app-routing.module';
+import { importProvidersFrom } from '@angular/core';
+import { RequestInterceptorService } from './app/core.module/interceptor/request.interceptor';
 
-import { AppModule } from './app/app.module';
-
-platformBrowserDynamic().bootstrapModule(AppModule)
-  .catch(err => console.error(err));
+bootstrapApplication(AppComponent, {
+  providers: [
+    AuthGuardService, // Either here or through provided root paam in injector
+    importProvidersFrom(HttpClientModule),
+    importProvidersFrom(AppRoutingModule),
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: RequestInterceptorService,
+      multi: true,
+    },
+  ],
+});

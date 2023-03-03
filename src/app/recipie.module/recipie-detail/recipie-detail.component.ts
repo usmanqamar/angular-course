@@ -1,12 +1,16 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { RecipeService } from '../services/recipe.service';
 import { Recipie } from '../recipie.model';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { DropdownDirective } from '../../shared.module/directives/dropdown.directive';
 
 @Component({
+  standalone: true,
   selector: 'app-recipie-detail',
   templateUrl: './recipie-detail.component.html',
   styleUrls: ['./recipie-detail.component.css'],
+  imports: [CommonModule, DropdownDirective, RouterLink],
 })
 export class RecipieDetailComponent implements OnInit {
   @Input() recipe: Recipie = {} as Recipie;

@@ -9,7 +9,7 @@ import { map, Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { AuthService } from '../../auth.module/auth.service';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class AuthGuardService implements CanActivate {
   constructor(private router: Router, private auth: AuthService) {}
   canActivate(
@@ -23,6 +23,8 @@ export class AuthGuardService implements CanActivate {
     return this.auth.user.pipe(
       map((user) => {
         const isAuthenticated = !!user;
+        console.log(user, '*********');
+
         if (isAuthenticated) {
           return true;
         } else {

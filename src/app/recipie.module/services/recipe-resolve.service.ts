@@ -7,11 +7,10 @@ import {
 import { Observable } from 'rxjs';
 import { Recipie } from '../recipie.model';
 import { RecipeService } from './recipe.service';
-//
-// @Injectable({
-//   providedIn: 'root',
-// })
 
+@Injectable({
+  providedIn: 'root',
+})
 export class RecipeResolveService implements Resolve<Recipie[]> {
   constructor(private recipeService: RecipeService) {}
   resolve(

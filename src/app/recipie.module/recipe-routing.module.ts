@@ -13,7 +13,7 @@ const ROUTES: Routes = [
     component: RecipieComponent,
     canActivate: [AuthGuardService],
     children: [
-      { path: '', component: RecipeStartComponent, pathMatch: 'full' },
+      { path: '', component: RecipeStartComponent },
       {
         path: 'new',
         component: EditRecipeComponent,
@@ -30,6 +30,5 @@ const ROUTES: Routes = [
 ];
 @NgModule({
   imports: [RouterModule.forChild(ROUTES)],
-  exports: [RouterModule],
 })
 export class RecipeRoutingModule {}

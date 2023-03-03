@@ -1,6 +1,7 @@
 import { Directive, Input, TemplateRef, ViewContainerRef } from '@angular/core';
 
 @Directive({
+  standalone: true,
   selector: '[appUnless]',
 })
 export class UnlessDirective {

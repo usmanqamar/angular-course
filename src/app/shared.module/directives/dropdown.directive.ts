@@ -7,6 +7,7 @@ import {
 } from '@angular/core';
 
 @Directive({
+  standalone: true,
   selector: '[appDropdown]',
 })
 export class DropdownDirective {
