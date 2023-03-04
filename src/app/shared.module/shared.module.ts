@@ -6,12 +6,14 @@ import { CommonModule } from '@angular/common';
 import { LoaderComponent } from './loader/loader.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoggingService } from '../logging.service';
+import { ShortenPipe } from './pipes/shorten.pipe';
 @NgModule({
   declarations: [
     DropdownDirective,
     UnlessDirective,
     HighlightDirective,
     LoaderComponent,
+    ShortenPipe,
   ],
   imports: [CommonModule],
   providers: [LoggingService],
@@ -23,6 +25,7 @@ import { LoggingService } from '../logging.service';
     HighlightDirective,
     UnlessDirective,
     LoaderComponent,
+    ShortenPipe,
   ],
 })
 export class SharedModule {}

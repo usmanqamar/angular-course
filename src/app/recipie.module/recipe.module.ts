@@ -1,6 +1,4 @@
 import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
 import { RecipeRoutingModule } from './recipe-routing.module';
 import { RecipieComponent } from './recipie.component';
 import { RecipieListComponent } from './recipie-list/recipie-list.component';
@@ -9,7 +7,10 @@ import { RecipieDetailComponent } from './recipie-detail/recipie-detail.componen
 import { RecipeStartComponent } from './recipe-start/recipe-start.component';
 import { EditRecipeComponent } from './edit-recipe/edit-recipe.component';
 import { SharedModule } from '../shared.module/shared.module';
-import { LoggingService } from '../logging.service';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { RecipeEffects } from './store/recipe.effects';
+import { reducer } from './store/recipe.reducer';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,11 @@ import { LoggingService } from '../logging.service';
     EditRecipeComponent,
   ],
 
-  imports: [RecipeRoutingModule, SharedModule],
-  // providers: [LoggingService],
+  imports: [
+    RecipeRoutingModule,
+    SharedModule,
+    StoreModule.forFeature('recipes', reducer),
+    EffectsModule.forFeature([RecipeEffects]),
+  ],
 })
 export class RecipeModule {}

@@ -2,15 +2,12 @@ import { Injectable } from '@angular/core';
 import { Recipie } from '../recipie.model';
 import { Ingredient } from '../../shared.module/ingredient.model';
 import { ShoppingListService } from '../../shopping-list.module/services/shopping-list.service';
-import { Subject } from 'rxjs/internal/Subject';
 import { HttpClient } from '@angular/common/http';
-import { firstValueFrom, map, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class RecipeService {
-  recipeAdded = new Subject<Recipie[] | boolean>();
   private recipies: Recipie[] = [
     new Recipie(
       'A Test Recipe',
@@ -35,38 +32,8 @@ export class RecipeService {
     private shoppingService: ShoppingListService,
     private http: HttpClient
   ) {}
-  getRecipes(): Observable<any> {
-    return this.http.get<{ [key: string]: Recipie }>('recipes.json').pipe(
-      map((response) => {
-        const updatedResponse: Recipie[] = [];
-        for (const key in response) {
-          updatedResponse.push({ ...response[key], id: key });
-        }
-        return updatedResponse;
-      })
-    );
-  }
-  getRecipe(id: number): Observable<any> {
-    return this.http.get<Recipie>(`recipes/${id}.json`).pipe(
-      map((response) => {
-        return { ...response, id, ingredients: response?.ingredients || [] };
-      })
-    );
-  }
-  deleteRecipe(id: number) {
-    //this.recipies.splice(id, 1);
-    return this.http.delete(`recipes/${id}.json`);
-  }
+
   addIngredientToShoppingList(ingredients: Ingredient[]) {
     this.shoppingService.addIngredients(ingredients);
-  }
-  async addRecipe(recipe: Recipie) {
-    //this.recipies.push(recipe);
-    await firstValueFrom(this.http.post(`recipes.json`, recipe));
-    this.recipeAdded.next(true);
-  }
-  updateRecipe(index: number, recipe: Recipie) {
-    this.recipies[index] = recipe;
-    this.recipeAdded.next(this.recipies.slice());
   }
 }

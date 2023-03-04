@@ -4,20 +4,31 @@ import {
   Resolve,
   RouterStateSnapshot,
 } from '@angular/router';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { Recipie } from '../recipie.model';
 import { RecipeService } from './recipe.service';
-//
-// @Injectable({
-//   providedIn: 'root',
-// })
+import { AppState } from '../../store/app.reducer';
+import { Store } from '@ngrx/store';
+import { fetchRecipe, fetchRecipeSuccess } from '../store/recipe.actions';
+import { Actions, ofType } from '@ngrx/effects';
 
-export class RecipeResolveService implements Resolve<Recipie[]> {
-  constructor(private recipeService: RecipeService) {}
+@Injectable({
+  providedIn: 'root',
+})
+export class RecipeResolveService implements Resolve<Recipie> {
+  constructor(
+    private recipeService: RecipeService,
+    private store: Store<AppState>,
+    private action$: Actions
+  ) {}
   resolve(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
-  ): Observable<Recipie[]> | Promise<Recipie[]> | Recipie[] {
-    return this.recipeService.getRecipes();
+  ): Observable<Recipie> | Promise<Recipie> | Recipie {
+    this.store.dispatch(fetchRecipe({ id: route.params['id'] }));
+    return this.action$.pipe(
+      ofType(fetchRecipeSuccess.type),
+      map((data: any) => data.recipe)
+    );
   }
 }

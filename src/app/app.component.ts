@@ -7,6 +7,10 @@ import {
   NavigationStart,
   Router,
 } from '@angular/router';
+import { AppState } from './store/app.reducer';
+import { Store } from '@ngrx/store';
+import { autoLogin } from './auth.module/store/auth.actions';
+import { selectError } from './global/global.selectors';
 
 @Component({
   selector: 'app-root',
@@ -17,17 +21,16 @@ export class AppComponent implements OnInit, OnDestroy {
   title = 'angular-course';
   subscription: Subscription;
   appError: string;
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private store: Store<AppState>
+  ) {}
   ngOnInit() {
-    this.authService.autoLogin();
-    this.authService.apiError.subscribe((error) => {
+    this.store.dispatch(autoLogin());
+    this.store.select(selectError).subscribe((error) => {
       this.appError = error;
     });
-    this.router.events
-      .pipe(filter((event) => event instanceof NavigationEnd))
-      .subscribe(() => {
-        this.appError = '';
-      });
   }
   ngOnDestroy() {
     this.subscription.unsubscribe();
